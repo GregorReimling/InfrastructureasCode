@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+
+
+
+        "location": {
+            "value": "westeurope"
+        },
+        "subnetName": {
+            "value": "DefaultServer"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/27a2c2c1-3244-4d2b-81fb-295710fdbe6d/resourceGroups/rg_network/providers/Microsoft.Network/virtualNetworks/VNETSpokeGR"
+        },
+        "virtualMachineName": {
+            "value": "AzWS20192"
+        },
+        "osDiskType": {
+            "type": "string",            
+            "allowedValues": [
+                "Standard_LRS",
+                "StandardSSD_LRS",
+                "Premium_LRS"
+              ],
+            "value": "Premium_LRS"
+            
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2s_v3"
+        },
+        "adminUsername": {
+            "value": "AzureRoot"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                  "id": "/subscriptions/27a2c2c1-3244-4d2b-81fb-295710fdbe6d/resourceGroups/rg_security/providers/Microsoft.KeyVault/vaults/azcredentials"
+                                   
+                },
+                "secretName": "azvmlocaadminpwd"
+              }
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "vmdiagsaacc"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "/subscriptions/27a2c2c1-3244-4d2b-81fb-295710fdbe6d/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vmdiagsaacc"
+        }
+    }
+}

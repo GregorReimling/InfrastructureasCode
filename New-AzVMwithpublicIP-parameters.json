@@ -1,0 +1,100 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "networkInterfaceName": {
+            "value": "azureroot837"
+        },
+        "networkSecurityGroupName": {
+            "value": "AzureRoot-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                }
+            ]
+        },
+        "subnetName": {
+            "value": "DefaultServer"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/27a2c2c1-3244-4d2b-81fb-295710fdbe6d/resourceGroups/rg_network/providers/Microsoft.Network/virtualNetworks/VNETSpokeGR"
+        },
+        "publicIpAddressName": {
+            "value": "AzureRoot-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "virtualMachineName": {
+            "value": "AzureRoot"
+        },
+        "virtualMachineRG": {
+            "value": "test_rg"
+        },
+        "osDiskType": {
+            "value": "Premium_LRS"
+        },
+        "dataDisks": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "caching": "None",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "AzureRoot_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null
+                }
+            ]
+        },
+        "dataDiskResources": {
+            "value": [
+                {
+                    "name": "AzureRoot_DataDisk_0",
+                    "diskSizeGB": 2048,
+                    "sku": "Premium_LRS",
+                    "creationData": {
+                        "createOption": "empty"
+                    }
+                }
+            ]
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS1_v2"
+        },
+        "adminUsername": {
+            "value": "AzureRoot"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                  "id": "/subscriptions/27a2c2c1-3244-4d2b-81fb-295710fdbe6d/resourceGroups/rg_security/providers/Microsoft.KeyVault/vaults/azcredentials"
+                                   
+                },
+                "secretName": "azvmlocaadminpwd"
+              }
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "vmdiagsaacc"
+        },
+        "diagnosticsStorageAccountId": {
+            "value": "/subscriptions/27a2c2c1-3244-4d2b-81fb-295710fdbe6d/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vmdiagsaacc"
+        }
+    }
+}
